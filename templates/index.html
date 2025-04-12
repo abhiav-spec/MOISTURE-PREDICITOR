@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Moisture Level Prediction</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #dbe6f6, #c5796d);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .form-container {
+      background-color: #ffffffcc;
+      padding: 30px 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      border-color: #5a9bd5;
+      outline: none;
+    }
+
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      background-color: #5a9bd5;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #4a8acc;
+    }
+
+    .result {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 20px;
+      color: #333;
+    }
+
+    @media (max-width: 600px) {
+      .form-container {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Moisture Level Prediction</h2>
+  <form method="POST" action="/">
+    <label for="timestamp">Timestamp:</label>
+    <input type="datetime-local" id="timestamp" name="timestamp" required>
+
+    <label for="temperature">Temperature (°C):</label>
+    <input type="number" step="0.1" id="temperature" name="temperature" required>
+
+    <label for="humidity">Humidity (%):</label>
+    <input type="number" step="0.1" id="humidity" name="humidity" required>
+
+    <label for="soilType">Soil Type:</label>
+    <select id="soilType" name="soilType">
+      <option value="Loamy">Loamy</option>
+      <option value="Clayey">Clayey</option>
+      <option value="Sandy">Sandy</option>
+    </select>
+
+    <label for="rainfall">Rainfall (mm):</label>
+    <input type="number" step="0.1" id="rainfall" name="rainfall" required>
+
+    <label for="windSpeed">Wind Speed (km/h):</label>
+    <input type="number" step="0.1" id="windSpeed" name="windSpeed" required>
+
+    <label for="sunlight">Sunlight (hours):</label>
+    <input type="number" step="0.1" id="sunlight" name="sunlight" required>
+
+    <label for="irrigation">Irrigation Applied:</label>
+    <select id="irrigation" name="irrigation">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  {% if moisture is not none %}
+    <div class="result">
+      <h3>Predicted Soil Moisture: {{ moisture }}%</h3>
+    </div>
+  {% endif %}
+</div>
+
+</body>
+</html>
